@@ -16,9 +16,12 @@ export default function Industries() {
   const select = (i: number, focus?: "desktop" | "mobile") => {
     setActive(i);
     const list = focus === "mobile" ? mobileTabs.current : tabs.current;
-    if (focus) {
-      list[i]?.focus();
-      list[i]?.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+    if (focus) list[i]?.focus({ preventScroll: true });
+    const tab = mobileTabs.current[i];
+    const strip = tab?.parentElement;
+    if (tab && strip && strip.clientWidth) {
+      const offset = tab.getBoundingClientRect().left - strip.getBoundingClientRect().left + strip.scrollLeft;
+      strip.scrollTo({ left: offset - (strip.clientWidth - tab.offsetWidth) / 2, behavior: "smooth" });
     }
   };
 
