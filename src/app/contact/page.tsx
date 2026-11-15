@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
+import SmokeLayer from "@/components/SmokeLayer";
+import GlowText from "@/components/GlowText";
 import ContactForm from "@/components/ContactForm";
-import { STEPS, asset } from "@/lib/site";
+import { STEPS } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Let’s Talk",
@@ -16,22 +18,18 @@ export default function ContactPage() {
     <div className="relative min-h-screen w-full bg-[#161616] text-white">
       <Nav />
       <main id="main" className="relative overflow-hidden px-6 pb-12 pt-40 md:px-10 md:pt-52">
-        <div
-          aria-hidden="true"
-          className="smoke-mask pointer-events-none absolute inset-0"
-          style={{ backgroundImage: `url(${asset("/textures/smoke.webp")})`, backgroundSize: "cover", backgroundPosition: "center", opacity: 0.1, mixBlendMode: "screen" }}
-        />
+        <SmokeLayer opacity={0.1} />
         <div className="relative mx-auto grid max-w-7xl gap-16 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
           <div>
             <Reveal immediate>
               <p className="mb-10 font-pixel text-[11px] uppercase tracking-[0.3em] text-white/30">Let’s Talk</p>
             </Reveal>
             <Reveal immediate y={20} delay={0.1}>
-              <h1 className="text-glow-metallic font-display" style={{ fontSize: "clamp(36px, 6vw, 64px)", lineHeight: 0.9, letterSpacing: "-0.045em" }}>
+              <GlowText as="h1" className="font-display block" style={{ fontSize: "clamp(36px, 6vw, 64px)", lineHeight: 0.9, letterSpacing: "-0.045em" }}>
                 Show us what
                 <br />
                 slows you down.
-              </h1>
+              </GlowText>
             </Reveal>
             <Reveal immediate y={14} delay={0.2}>
               <p className="mt-8 max-w-md text-base leading-relaxed text-white/60 md:text-lg">

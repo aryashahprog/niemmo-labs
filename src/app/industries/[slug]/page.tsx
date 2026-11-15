@@ -50,7 +50,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
           <div className="relative mx-auto max-w-7xl">
             <Reveal immediate>
               <nav aria-label="Breadcrumb" className="mb-10 font-pixel text-[11px] uppercase tracking-[0.3em] text-white/30">
-                <Link href="/#industries" className="rounded-sm transition-colors hover:text-white/60">
+                <Link href="/#industries" className="hit-area rounded-sm transition-colors hover:text-white/60">
                   Industries
                 </Link>{" "}
                 / <span style={{ color: ind.color }}>{pad(idx + 1)}</span>

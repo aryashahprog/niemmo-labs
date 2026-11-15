@@ -53,11 +53,25 @@ body {
   border-radius: 2px;
 }
 
-.text-glow-metallic {
+.glow-text {
+  position: relative;
+  isolation: isolate;
+}
+.glow-text-shadow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  color: transparent;
+  text-shadow:
+    0 0 8px #e1e8f273,
+    0 0 25px #c8d4e638,
+    0 0 50px #b4c3de1a;
+  pointer-events: none;
+  user-select: none;
+}
+.glow-text-fill {
   color: #fff;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 8px #e1e8f273) drop-shadow(0 0 25px #c8d4e638)
-    drop-shadow(0 0 50px #b4c3de1a);
   background: linear-gradient(90deg, #eeecea, #fff 24%, #eaedf4 46%, #fff 70%, #f0edea);
   -webkit-background-clip: text;
   background-clip: text;
@@ -113,9 +127,29 @@ html.js [data-reveal][data-in="true"] {
   animation: bob 2s ease-in-out infinite;
 }
 
+.smoke-layer {
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: screen;
+}
+html:not(.js) .smoke-layer,
+.smoke-layer[data-in="true"] {
+  background-image: var(--smoke);
+}
+
 .smoke-mask {
   mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 10%, transparent 65%);
   -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 10%, transparent 65%);
+}
+
+/* Enlarges a small text link's touch area to at least 24px without changing layout. */
+.hit-area {
+  position: relative;
+}
+.hit-area::after {
+  content: "";
+  position: absolute;
+  inset: -6px -4px;
 }
 
 .no-scrollbar::-webkit-scrollbar { display: none; }

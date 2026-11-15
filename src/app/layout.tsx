@@ -1,12 +1,29 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { GeistSans } from "geist/font/sans";
-import { GeistPixelLine } from "geist/font/pixel/line";
 import "./globals.css";
 import { SITE_URL, asset } from "@/lib/site";
+import { REVEAL_BODY, REVEAL_HEAD } from "@/lib/reveal-script";
+
+// Latin subsets of Geist and Inter (SIL OFL, see src/fonts/*-OFL.txt).
+const geistSans = localFont({
+  src: "../fonts/geist-sans-latin-var.woff2",
+  weight: "100 900",
+  variable: "--font-geist-sans",
+  display: "swap",
+});
+
+const geistPixel = localFont({
+  src: "../fonts/geist-pixel-line-latin.woff2",
+  weight: "500",
+  variable: "--font-geist-pixel-line",
+  display: "swap",
+  preload: false,
+  adjustFontFallback: false,
+  fallback: ["ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
+});
 
 const inter = localFont({
-  src: "../fonts/inter-latin-400-normal.woff2",
+  src: "../fonts/inter-latin-400-subset.woff2",
   weight: "400",
   variable: "--font-inter",
   display: "swap",
@@ -40,13 +57,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} ${GeistPixelLine.variable} ${inter.variable}`}
+      className={`${geistSans.variable} ${geistPixel.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: "document.documentElement.classList.add('js')",
+            __html: REVEAL_HEAD,
           }}
         />
       </head>
@@ -55,6 +72,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           Skip to content
         </a>
         {children}
+        <script dangerouslySetInnerHTML={{ __html: REVEAL_BODY }} />
       </body>
     </html>
   );

@@ -12,7 +12,7 @@ export default function Footer() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="rounded-sm text-xs tracking-wide text-white/60 transition-colors duration-300 hover:text-white"
+                className="hit-area rounded-sm text-xs tracking-wide text-white/60 transition-colors duration-300 hover:text-white"
               >
                 {l.label}
               </Link>

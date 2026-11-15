@@ -183,7 +183,7 @@ export default function Industries() {
                 </div>
                 <Link
                   href={`/industries/${ind.slug}/`}
-                  className="group inline-flex items-center gap-2 rounded-sm text-xs font-medium uppercase tracking-widest text-white/70 transition-colors hover:text-white"
+                  className="hit-area group inline-flex items-center gap-2 rounded-sm text-xs font-medium uppercase tracking-widest text-white/70 transition-colors hover:text-white"
                 >
                   Explore {ind.short}
                   <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">
@@ -210,7 +210,7 @@ export default function Industries() {
             key={it.slug}
             tabIndex={-1}
             onClick={() => select(i)}
-            className="py-2"
+            className="-my-[3px] py-[11px]"
           >
             <span
               className="block h-[3px] w-6 overflow-hidden rounded-full md:w-9"

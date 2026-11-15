@@ -1,13 +1,15 @@
 import Nav from "@/components/Nav";
 import HeroCanvas from "@/components/HeroCanvas";
 import Reveal from "@/components/Reveal";
+import SmokeLayer from "@/components/SmokeLayer";
+import GlowText from "@/components/GlowText";
 import SectionLabel from "@/components/SectionLabel";
 import Workflows from "@/components/Workflows";
 import Industries from "@/components/Industries";
 import ClosingCta from "@/components/ClosingCta";
 import Footer from "@/components/Footer";
 import { PrimaryButton, SecondaryButton } from "@/components/Buttons";
-import { CAPABILITIES, CTA, STEPS, TOOL_TYPES, asset } from "@/lib/site";
+import { CAPABILITIES, CTA, STEPS, TOOL_TYPES } from "@/lib/site";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -26,13 +28,13 @@ export default function Home() {
               <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
                 <h1 className="relative">
                   {["Your business.", "Less busywork."].map((line, i) => (
-                    <span
+                    <GlowText
                       key={line}
-                      className="hero-in text-glow-metallic font-display block"
+                      className="hero-in font-display block"
                       style={{ fontSize: "clamp(36px, 8vw, 64px)", lineHeight: 0.86, letterSpacing: "-0.045em", fontWeight: 400, paddingBottom: "0.06em", animationDelay: `${0.15 + i * 0.12}s` }}
                     >
                       {line}
-                    </span>
+                    </GlowText>
                   ))}
                 </h1>
                 <div className="hero-in max-w-sm md:pb-1" style={{ animationDelay: "0.45s" }}>
@@ -57,11 +59,7 @@ export default function Home() {
 
         {/* Mission */}
         <section aria-labelledby="mission-heading" className="relative z-10 overflow-hidden pb-20 pt-32 md:pb-28 md:pt-48">
-          <div
-            aria-hidden="true"
-            className="smoke-mask pointer-events-none absolute inset-0"
-            style={{ backgroundImage: `url(${asset("/textures/smoke.webp")})`, backgroundSize: "cover", backgroundPosition: "center", opacity: 0.15, mixBlendMode: "screen" }}
-          />
+          <SmokeLayer opacity={0.15} />
           <div className="relative mx-auto max-w-7xl px-6 md:px-10">
             <SectionLabel>Our Mission</SectionLabel>
             <Reveal y={40}>
