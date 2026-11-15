@@ -17,7 +17,7 @@ export default function ClosingCta() {
           </GlowText>
         </Reveal>
         <Reveal y={12} delay={0.1}>
-          <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-white/60 md:text-lg">
+          <p className="mx-auto mt-8 max-w-xl text-base leading-relaxed text-white/70 md:text-lg">
             Let’s find where automation can make a difference.
           </p>
         </Reveal>

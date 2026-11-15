@@ -12,8 +12,8 @@ type Status =
   | { kind: "error"; message: string };
 
 const field =
-  "mt-2 w-full rounded-md border border-white/[0.12] bg-black/30 px-4 py-3 text-base text-white placeholder:text-white/25 transition-colors focus:border-white/50 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50";
-const label = "block text-[11px] uppercase tracking-[0.2em] text-white/45";
+  "mt-2 w-full rounded-md border border-white/[0.12] bg-black/30 px-4 py-3 text-base text-white placeholder:text-white/35 transition-colors focus:border-white/50 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50";
+const label = "block text-[11px] uppercase tracking-[0.2em] text-white/60";
 
 export default function ContactForm() {
   const configured = Boolean(CONTACT.endpoint || CONTACT.email);
@@ -68,7 +68,7 @@ export default function ContactForm() {
     return (
       <div role="status" className="rounded-lg border border-white/[0.08] bg-black/30 p-8">
         <p className="text-2xl font-light tracking-tight">Thanks — your message is in.</p>
-        <p className="mt-3 text-white/60">We’ll get back to you soon.</p>
+        <p className="mt-3 text-white/70">We’ll get back to you soon.</p>
       </div>
     );
   }
@@ -124,14 +124,14 @@ export default function ContactForm() {
             {status.kind === "sending" ? "Sending…" : "Send message"}
           </button>
           {CONTACT.email && !CONTACT.endpoint && (
-            <span className="text-xs text-white/40">Opens your email app with your message ready to send.</span>
+            <span className="text-xs text-white/55">Opens your email app with your message ready to send.</span>
           )}
         </div>
       </fieldset>
       <div aria-live="polite" className="mt-6 text-sm">
         {status.kind === "error" && <p className="text-[#ff8a7a]">{status.message}</p>}
         {status.kind === "mailto" && (
-          <p className="text-white/60">
+          <p className="text-white/70">
             Your email app should have opened with your message. If it didn’t,{" "}
             <a href={status.href} className="underline underline-offset-4 hover:text-white">open it here</a> or email{" "}
             <a href={`mailto:${CONTACT.email}`} className="underline underline-offset-4 hover:text-white">{CONTACT.email}</a>.

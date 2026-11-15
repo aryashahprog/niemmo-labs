@@ -19,8 +19,8 @@ export default function Footer() {
             ))}
           </nav>
           <div className="text-center sm:text-right">
-            <p className="text-xs tracking-wide text-white/50">© {new Date().getFullYear()} Niemmo Labs</p>
-            <p className="mt-0.5 text-xs tracking-wide text-white/50">All Rights Reserved.</p>
+            <p className="text-xs tracking-wide text-white/70">© {new Date().getFullYear()} Niemmo Labs</p>
+            <p className="mt-0.5 text-xs tracking-wide text-white/70">All Rights Reserved.</p>
           </div>
         </div>
       </div>

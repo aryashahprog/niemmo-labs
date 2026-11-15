@@ -38,17 +38,17 @@ export const CAPABILITIES = [
   },
   {
     title: "System integrations",
-    body: "The tools you already use, connected so information moves between them without copy and paste.",
+    body: "Your systems connected, so information moves between them without copy and paste.",
   },
   {
     title: "Custom operational software",
-    body: "When off-the-shelf doesn’t fit, lightweight internal tools built around how your team actually works.",
+    body: "When off-the-shelf doesn’t fit, lightweight internal tools built for how your team actually works.",
   },
 ] as const;
 
 export const STEPS = [
   { label: "Understand", body: "We map your workflows with the people doing the work." },
-  { label: "Build", body: "We develop automations around your operations and existing tools." },
+  { label: "Build", body: "We build the automations and connect them to your systems." },
   { label: "Deploy", body: "We put the solution into daily use and help your team adopt it." },
   { label: "Improve", body: "We monitor, maintain and refine it as your business evolves." },
 ] as const;

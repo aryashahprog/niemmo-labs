@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import Reveal from "@/components/Reveal";
 import SectionLabel from "@/components/SectionLabel";
 import ClosingCta from "@/components/ClosingCta";
+import FlowExample from "@/components/FlowExample";
 import Footer from "@/components/Footer";
 import { INDUSTRIES, getIndustry } from "@/lib/industries";
 import { STEPS } from "@/lib/site";
@@ -49,7 +50,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
           </div>
           <div className="relative mx-auto max-w-7xl">
             <Reveal immediate>
-              <nav aria-label="Breadcrumb" className="mb-10 font-pixel text-[11px] uppercase tracking-[0.3em] text-white/30">
+              <nav aria-label="Breadcrumb" className="mb-10 font-pixel text-[11px] uppercase tracking-[0.3em] text-white/45">
                 <Link href="/#industries" className="hit-area rounded-sm transition-colors hover:text-white/60">
                   Industries
                 </Link>{" "}
@@ -64,16 +65,28 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             </Reveal>
             <Reveal immediate y={14} delay={0.2} className="mt-10 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
               <p className="max-w-2xl text-lg font-light leading-relaxed text-white/75 md:text-xl">{ind.summary}</p>
-              <p className="text-[11px] uppercase tracking-[0.2em] text-white/35 md:text-right">For {ind.audience}</p>
+              <p className="text-[11px] uppercase tracking-[0.2em] text-white/50 md:text-right">For {ind.audience}</p>
             </Reveal>
           </div>
         </header>
 
+        <section aria-labelledby="flow-heading" className="relative px-6 pb-24 md:px-10 md:pb-32">
+          <div className="mx-auto max-w-7xl">
+            <SectionLabel>One workflow, step by step</SectionLabel>
+            <h2 id="flow-heading" className="sr-only">
+              One workflow, step by step
+            </h2>
+            <Reveal y={20}>
+              <FlowExample flow={ind.example} color={ind.color} />
+            </Reveal>
+          </div>
+        </section>
+
         <section aria-labelledby="wf-heading" className="relative px-6 md:px-10">
           <div className="mx-auto max-w-7xl">
-            <SectionLabel>Example workflows</SectionLabel>
+            <SectionLabel>More workflows we can build</SectionLabel>
             <h2 id="wf-heading" className="sr-only">
-              Example workflows
+              More workflows we can build
             </h2>
             <ol className="grid gap-px overflow-hidden rounded-lg border border-white/[0.08] bg-white/[0.08] md:grid-cols-2 lg:grid-cols-3">
               {ind.workflows.map((w, i) => (
@@ -83,19 +96,19 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                     {pad(i + 1)}
                   </span>
                   <h3 className="mt-8 text-2xl font-light tracking-tight text-white">{w.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-white/55 md:text-base">{w.body}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-white/65 md:text-base">{w.body}</p>
                   </Reveal>
                 </li>
               ))}
               <li className="flex flex-col justify-between bg-[#161616] p-7 md:p-9">
-                <span className="font-pixel text-sm text-white/30">+</span>
-                <p className="mt-8 text-sm leading-relaxed text-white/55 md:text-base">
+                <span className="font-pixel text-sm text-white/45">+</span>
+                <p className="mt-8 text-sm leading-relaxed text-white/65 md:text-base">
                   These are examples of what we can build, not a fixed menu. We start from how your team works today and
-                  shape automations around it.
+                  build from there.
                 </p>
               </li>
             </ol>
-            <p className="mt-6 text-xs leading-relaxed text-white/35">
+            <p className="mt-6 text-xs leading-relaxed text-white/50">
               Workflows described here illustrate what can be built; they are not past client deployments.
             </p>
           </div>
@@ -106,11 +119,11 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             <div>
               <SectionLabel>Connects with</SectionLabel>
               <h2 id="tools-heading" className="text-3xl font-light leading-[1.1] tracking-tight md:text-4xl">
-                Works with the systems <span className="text-white/60">you already run.</span>
+                Built to connect with <span className="text-white/60">your existing systems.</span>
               </h2>
               <div className="mt-8 flex flex-wrap gap-3">
                 {ind.tools.map((t) => (
-                  <span key={t} className="rounded-lg border border-white/[0.08] px-4 py-2 font-pixel text-[11px] uppercase tracking-[0.15em] text-white/45 md:text-xs">
+                  <span key={t} className="rounded-lg border border-white/[0.08] px-4 py-2 font-pixel text-[11px] uppercase tracking-[0.15em] text-white/60 md:text-xs">
                     {t}
                   </span>
                 ))}
@@ -121,9 +134,9 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               <ol className="border-t border-white/[0.06]">
                 {STEPS.map((s, i) => (
                   <li key={s.label} className="grid grid-cols-[44px_120px_1fr] items-baseline gap-x-3 border-b border-white/[0.06] py-4">
-                    <span className="font-pixel text-xs text-white/30">{pad(i + 1)}</span>
+                    <span className="font-pixel text-xs text-white/45">{pad(i + 1)}</span>
                     <span className="text-base text-white">{s.label}</span>
-                    <span className="text-sm leading-relaxed text-white/55">{s.body}</span>
+                    <span className="text-sm leading-relaxed text-white/65">{s.body}</span>
                   </li>
                 ))}
               </ol>
@@ -142,7 +155,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                 href={`/industries/${it.slug}/`}
                 className={`group py-8 ${align} ${label === "Previous" ? "border-r border-white/[0.08] pr-4" : "pl-4"}`}
               >
-                <span className="block text-[11px] uppercase tracking-[0.2em] text-white/30">{label}</span>
+                <span className="block text-[11px] uppercase tracking-[0.2em] text-white/45">{label}</span>
                 <span className="mt-2 block text-xl font-light tracking-tight text-white/60 transition-colors group-hover:text-white md:text-3xl">
                   {it.name}
                 </span>

@@ -1,5 +1,13 @@
 export type Workflow = { title: string; body: string };
 
+export type FlowExample = {
+  name: string;
+  trigger: string;
+  steps: string[];
+  review: string;
+  result: string;
+};
+
 export type Industry = {
   slug: string;
   name: string;
@@ -9,6 +17,7 @@ export type Industry = {
   summary: string;
   workflows: Workflow[];
   tools: string[];
+  example: FlowExample;
 };
 
 export const INDUSTRIES: Industry[] = [
@@ -25,9 +34,20 @@ export const INDUSTRIES: Industry[] = [
       { title: "Appointment scheduling", body: "Offer open slots, confirm bookings, send reminders and handle reschedule requests." },
       { title: "Referral routing", body: "Read incoming referrals, match them to the right provider and flag missing information." },
       { title: "Administrative follow-ups", body: "Track outstanding paperwork, authorizations and callbacks so nothing sits in a queue." },
-      { title: "EMR workflows", body: "Move structured data between your EMR and the tools around it, with staff reviewing where judgment is needed." },
+      { title: "EMR workflows", body: "Move structured data between your EMR and connected tools, with staff reviewing where judgment is needed." },
     ],
     tools: ["EMR / EHR", "Practice management", "Scheduling", "E-fax", "Email & SMS"],
+    example: {
+      name: "New patient intake",
+      trigger: "A new patient books an appointment online.",
+      steps: [
+        "Intake forms and insurance questions go out by text or email.",
+        "Responses are checked for missing fields, with reminders until they’re complete.",
+        "Completed details are prepared for the patient record.",
+      ],
+      review: "Front-desk staff review flagged items, such as unclear insurance details, before anything is filed.",
+      result: "The patient arrives with paperwork done and the record ready for the visit.",
+    },
   },
   {
     slug: "home-services",
@@ -44,6 +64,17 @@ export const INDUSTRIES: Industry[] = [
       { title: "Customer reminders", body: "Send appointment confirmations, arrival notices and seasonal maintenance reminders." },
     ],
     tools: ["Field service software", "CRM", "Phone & SMS", "Calendar", "Accounting"],
+    example: {
+      name: "Estimate follow-up",
+      trigger: "A technician sends an estimate after a site visit.",
+      steps: [
+        "Follow-ups go out by text and email on a set schedule.",
+        "Customer replies are sorted into questions, approvals and declines.",
+        "Approved estimates become a job request with the details attached.",
+      ],
+      review: "The office confirms the time slot and technician before the job is booked.",
+      result: "Every open estimate gets followed up, and approved work goes straight to scheduling.",
+    },
   },
   {
     slug: "professional-services",
@@ -51,7 +82,7 @@ export const INDUSTRIES: Industry[] = [
     short: "Professional Services",
     color: "#5B8DEF",
     audience: "Consulting firms and agencies",
-    summary: "Take the coordination out of client delivery so your team can spend its time on the work itself.",
+    summary: "Spend less time coordinating client work.",
     workflows: [
       { title: "Client onboarding", body: "Send agreements, gather details and set up projects and folders as soon as a client signs." },
       { title: "Document collection", body: "Request files, track what’s outstanding and send reminders until everything is in." },
@@ -60,6 +91,17 @@ export const INDUSTRIES: Industry[] = [
       { title: "Recurring reporting", body: "Pull data from your systems and assemble client-ready reports on a schedule." },
     ],
     tools: ["CRM", "Project management", "Document storage", "E-signature", "Email & calendar"],
+    example: {
+      name: "Client onboarding",
+      trigger: "A client signs the engagement agreement.",
+      steps: [
+        "The project, folders and task list are created from your template.",
+        "A welcome email goes out with a checklist of documents needed.",
+        "Uploads are tracked, with reminders for anything missing.",
+      ],
+      review: "The account lead reviews the setup and approves the kickoff email.",
+      result: "Delivery starts with the files and context in one place.",
+    },
   },
   {
     slug: "real-estate",
@@ -76,6 +118,17 @@ export const INDUSTRIES: Industry[] = [
       { title: "Document organization", body: "File leases, applications and inspection reports to the right property and tenant." },
     ],
     tools: ["Property management software", "CRM", "Listings", "Email & SMS", "Document storage"],
+    example: {
+      name: "Maintenance request",
+      trigger: "A tenant submits a maintenance request with photos.",
+      steps: [
+        "The request is logged against the right property and unit.",
+        "An urgency level is suggested from the description and photos.",
+        "An available vendor is contacted and the tenant gets a confirmation.",
+      ],
+      review: "The property manager approves urgent jobs and anything above a set cost.",
+      result: "Every request has an owner, a status and a record.",
+    },
   },
   {
     slug: "accounting",
@@ -92,6 +145,17 @@ export const INDUSTRIES: Industry[] = [
       { title: "Reporting preparation", body: "Assemble recurring reports and workpapers from your ledger and client data." },
     ],
     tools: ["Accounting software", "Client portal", "Spreadsheets", "Document storage", "Email"],
+    example: {
+      name: "Month-end document collection",
+      trigger: "A client’s month-end close date is approaching.",
+      steps: [
+        "The client gets a list of the statements and receipts still needed.",
+        "Uploads are matched to the checklist, with reminders for gaps.",
+        "Documents are filed to the client folder and staged for review.",
+      ],
+      review: "A bookkeeper reviews anything unreadable or unmatched.",
+      result: "The close starts with a complete set of documents.",
+    },
   },
   {
     slug: "logistics",
@@ -108,6 +172,17 @@ export const INDUSTRIES: Industry[] = [
       { title: "Invoice reconciliation", body: "Match carrier invoices to rates and shipments and flag discrepancies for review." },
     ],
     tools: ["TMS", "ERP", "Email", "Driver apps", "Accounting"],
+    example: {
+      name: "Proof of delivery to invoice",
+      trigger: "A driver uploads a signed proof of delivery.",
+      steps: [
+        "The document is read and matched to the shipment.",
+        "Delivery details are checked against the order and agreed rate.",
+        "An invoice is drafted with the proof of delivery attached.",
+      ],
+      review: "Billing staff review mismatches, such as quantity or rate differences.",
+      result: "Invoices go out with the right documents attached.",
+    },
   },
   {
     slug: "construction",
@@ -124,6 +199,17 @@ export const INDUSTRIES: Industry[] = [
       { title: "Progress reporting", body: "Compile updates from the field into regular reports for owners and stakeholders." },
     ],
     tools: ["Project management", "Accounting", "Document storage", "Email", "Spreadsheets"],
+    example: {
+      name: "Subcontractor onboarding",
+      trigger: "A subcontractor is awarded work on a project.",
+      steps: [
+        "The insurance certificate, tax form and agreement are requested.",
+        "Documents are checked for required fields and expiration dates.",
+        "The subcontractor record is updated and renewal reminders are scheduled.",
+      ],
+      review: "The project manager approves the subcontractor before work starts.",
+      result: "Required documents are on file and expirations are tracked.",
+    },
   },
   {
     slug: "retail",
@@ -140,6 +226,17 @@ export const INDUSTRIES: Industry[] = [
       { title: "Supplier coordination", body: "Send reorder requests, confirm delivery dates and track open purchase orders." },
     ],
     tools: ["E-commerce platform", "Help desk", "Inventory", "Shipping", "Email"],
+    example: {
+      name: "Return request",
+      trigger: "A customer requests a return through your store.",
+      steps: [
+        "The order is checked against your return policy.",
+        "A return label is issued and the customer is updated.",
+        "The returned item is routed to restock, repair or write-off.",
+      ],
+      review: "Your team handles exceptions, such as items outside the return window.",
+      result: "Routine returns are handled the same way every time, and exceptions reach a person.",
+    },
   },
   {
     slug: "hospitality",
@@ -156,6 +253,17 @@ export const INDUSTRIES: Industry[] = [
       { title: "Vendor administration", body: "Track supplier orders, invoices and contracts in one place." },
     ],
     tools: ["Reservation system", "POS", "Messaging", "Scheduling", "Accounting"],
+    example: {
+      name: "Guest inquiry",
+      trigger: "A guest sends a question by email, chat or message.",
+      steps: [
+        "The question is matched to your policies, availability and amenities.",
+        "A reply is drafted in your voice.",
+        "Booking-related requests are added to the reservation.",
+      ],
+      review: "Staff approve replies to anything unusual, such as special requests or complaints.",
+      result: "Guests get quick, consistent answers and staff focus on the exceptions.",
+    },
   },
   {
     slug: "manufacturing",
@@ -172,6 +280,17 @@ export const INDUSTRIES: Industry[] = [
       { title: "Operational reporting", body: "Compile production, order and inventory data into regular reports." },
     ],
     tools: ["ERP", "Inventory", "EDI", "Email", "Spreadsheets"],
+    example: {
+      name: "Purchase-order entry",
+      trigger: "A customer emails a purchase order as a PDF.",
+      steps: [
+        "Line items, quantities and dates are extracted.",
+        "Items are checked against pricing and available stock.",
+        "A draft order is prepared in your ERP.",
+      ],
+      review: "Customer service approves the order and resolves any price or stock differences.",
+      result: "Orders are entered consistently and discrepancies are caught before confirmation.",
+    },
   },
 ];
 

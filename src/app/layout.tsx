@@ -37,11 +37,11 @@ export const metadata: Metadata = {
     template: "%s — Niemmo Labs",
   },
   description:
-    "We build and deploy AI automations around the way your business works. Less manual work. Smoother operations. More room to grow.",
+    "We build AI automations for customer follow-ups, documents, scheduling and reporting, so your team can spend more time running the business.",
   openGraph: {
     title: "Niemmo Labs",
     description:
-      "We build and deploy AI automations around the way your business works.",
+      "AI automations for customer follow-ups, documents, scheduling and reporting.",
     type: "website",
     url: "./",
   },

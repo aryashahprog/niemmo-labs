@@ -5,7 +5,12 @@ import Reveal from "@/components/Reveal";
 import SmokeLayer from "@/components/SmokeLayer";
 import GlowText from "@/components/GlowText";
 import ContactForm from "@/components/ContactForm";
-import { STEPS } from "@/lib/site";
+
+const NEXT_STEPS = [
+  { label: "First conversation", body: "We talk through your business and the work that slows your team down." },
+  { label: "Workflow review", body: "We look at how that work happens today, who does it and which tools it touches." },
+  { label: "Proposed scope", body: "We suggest what to automate first and outline how we would build it." },
+];
 
 export const metadata: Metadata = {
   title: "Let’s Talk",
@@ -22,7 +27,7 @@ export default function ContactPage() {
         <div className="relative mx-auto grid max-w-7xl gap-16 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
           <div>
             <Reveal immediate>
-              <p className="mb-10 font-pixel text-[11px] uppercase tracking-[0.3em] text-white/30">Let’s Talk</p>
+              <p className="mb-10 font-pixel text-[11px] uppercase tracking-[0.3em] text-white/45">Let’s Talk</p>
             </Reveal>
             <Reveal immediate y={20} delay={0.1}>
               <GlowText as="h1" className="font-display block" style={{ fontSize: "clamp(36px, 6vw, 64px)", lineHeight: 0.9, letterSpacing: "-0.045em" }}>
@@ -32,16 +37,16 @@ export default function ContactPage() {
               </GlowText>
             </Reveal>
             <Reveal immediate y={14} delay={0.2}>
-              <p className="mt-8 max-w-md text-base leading-relaxed text-white/60 md:text-lg">
+              <p className="mt-8 max-w-md text-base leading-relaxed text-white/70 md:text-lg">
                 Tell us a little about your business and the work that eats up your team’s time. We’ll find where automation
                 can make a difference.
               </p>
-              <p className="mt-12 text-[11px] uppercase tracking-[0.2em] text-white/30">What happens next</p>
+              <p className="mt-12 text-[11px] uppercase tracking-[0.2em] text-white/45">What happens next</p>
               <ol className="mt-4 border-t border-white/[0.06]">
-                {STEPS.map((s, i) => (
+                {NEXT_STEPS.map((s, i) => (
                   <li key={s.label} className="grid grid-cols-[36px_1fr] gap-x-3 border-b border-white/[0.06] py-3 text-sm">
-                    <span className="font-pixel text-white/30">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="text-white/60">
+                    <span className="font-pixel text-white/45">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="text-white/70">
                       <span className="text-white">{s.label}.</span> {s.body}
                     </span>
                   </li>

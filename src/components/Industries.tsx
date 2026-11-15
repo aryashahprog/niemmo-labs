@@ -5,6 +5,7 @@ import { useRef, useState, type KeyboardEvent } from "react";
 import { INDUSTRIES } from "@/lib/industries";
 
 const pad = (n: number) => String(n).padStart(2, "0");
+const FEATURED = [0, 1, 2];
 
 export default function Industries() {
   const [active, setActive] = useState(0);
@@ -90,7 +91,7 @@ export default function Industries() {
                     />
                     <span
                       className={`font-light leading-[1.05] tracking-tight transition-all duration-500 ${
-                        on ? "translate-x-0 text-white" : "-translate-x-2 text-white/30 group-hover:text-white/60"
+                        on ? "translate-x-0 text-white" : "-translate-x-2 text-white/45 group-hover:text-white/60"
                       }`}
                       style={{ fontSize: "clamp(26px, 2.65vw, 40px)" }}
                     >
@@ -104,6 +105,48 @@ export default function Industries() {
 
           {/* Mobile/tablet: horizontal tab strip */}
           <div className="-mx-6 lg:hidden">
+            <div className="mb-5 grid grid-cols-3 gap-2 px-6">
+              {FEATURED.map((i) => {
+                const it = INDUSTRIES[i];
+                const on = i === active;
+                return (
+                  <button
+                    key={it.slug}
+                    type="button"
+                    aria-pressed={on}
+                    aria-controls="industry-panel"
+                    onClick={() => select(i)}
+                    className={`rounded-md border px-3 py-3 text-left text-[13px] leading-tight transition-colors ${
+                      on ? "border-white/30 bg-white/[0.06] text-white" : "border-white/[0.1] text-white/70"
+                    }`}
+                  >
+                    <span aria-hidden="true" className="mb-2 block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: it.color }} />
+                    {it.short}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="mb-1 flex items-center justify-between gap-3 px-6">
+              <p className="font-pixel text-[11px] uppercase tracking-[0.2em] text-white/55">
+                All {n} · swipe <span aria-hidden="true">→</span>
+              </p>
+              <label htmlFor="industry-jump" className="sr-only">
+                Jump to an industry
+              </label>
+              <select
+                id="industry-jump"
+                value={active}
+                onChange={(e) => select(Number(e.target.value))}
+                className="max-w-[60%] rounded-sm border border-white/[0.15] bg-black/40 px-2 py-2 text-xs text-white/80"
+              >
+                {INDUSTRIES.map((it, i) => (
+                  <option key={it.slug} value={i}>
+                    {pad(i + 1)} {it.short}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="relative">
             <div
               role="tablist"
               aria-label="Industries"
@@ -124,7 +167,7 @@ export default function Industries() {
                     onClick={() => select(i, "mobile")}
                     onKeyDown={(e) => onKey(e, "mobile")}
                     className={`relative shrink-0 snap-start whitespace-nowrap py-3 text-2xl font-light tracking-tight transition-colors ${
-                      on ? "text-white" : "text-white/30"
+                      on ? "text-white" : "text-white/45"
                     }`}
                   >
                     {it.short}
@@ -136,6 +179,8 @@ export default function Industries() {
                   </button>
                 );
               })}
+            </div>
+            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 w-14 bg-gradient-to-l from-[#161616] to-transparent" />
             </div>
           </div>
 
@@ -154,11 +199,11 @@ export default function Industries() {
                 style={{ background: `linear-gradient(90deg, transparent, ${ind.color}66, transparent)` }}
               />
               <div key={ind.slug} className="panel-in">
-                <p className="font-pixel text-[11px] uppercase tracking-[0.2em] text-white/35">
+                <p className="font-pixel text-[11px] uppercase tracking-[0.2em] text-white/50">
                   <span style={{ color: ind.color }}>{pad(active + 1)}</span> / {pad(n)} · {ind.audience}
                 </p>
                 <p className="mt-5 text-base font-light leading-relaxed tracking-tight text-white/75 md:text-lg">{ind.summary}</p>
-                <p className="mt-7 text-[11px] uppercase tracking-[0.2em] text-white/30">Example workflows</p>
+                <p className="mt-7 text-[11px] uppercase tracking-[0.2em] text-white/45">Example workflows</p>
                 <ol className="mt-3 divide-y divide-white/[0.06] border-y border-white/[0.06]">
                   {ind.workflows.map((w, i) => (
                     <li key={w.title} className="grid grid-cols-[28px_1fr] gap-x-3 py-3 md:grid-cols-[28px_190px_1fr] md:gap-x-4">
@@ -166,7 +211,7 @@ export default function Industries() {
                         {pad(i + 1)}
                       </span>
                       <span className="text-sm font-medium leading-5 text-white/90">{w.title}</span>
-                      <span className="col-start-2 mt-1 text-sm leading-relaxed text-white/50 md:col-start-3 md:mt-0">{w.body}</span>
+                      <span className="col-start-2 mt-1 text-sm leading-relaxed text-white/60 md:col-start-3 md:mt-0">{w.body}</span>
                     </li>
                   ))}
                 </ol>
