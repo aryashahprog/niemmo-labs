@@ -9,8 +9,8 @@ const ALL: Item[] = INDUSTRIES.flatMap((ind) => ind.workflows.map((w) => ({ titl
 // interleave industries so neighbouring items differ
 const ORDERED: Item[] = [];
 for (let i = 0; i < 4; i++) INDUSTRIES.forEach((ind) => ORDERED.push({ title: ind.workflows[i].title, color: ind.color }));
-const ROW_A = ORDERED.slice(0, 8);
-const ROW_B = ORDERED.slice(8);
+const ROW_A = ORDERED.slice(0, 10);
+const ROW_B = ORDERED.slice(10);
 
 function Row({ items, reverse }: { items: Item[]; reverse?: boolean }) {
   return (
@@ -80,7 +80,7 @@ function FlipTile({ items, offset }: { items: Item[]; offset: number }) {
 }
 
 export default function Workflows() {
-  const tiles = Array.from({ length: 8 }, (_, t) => [ORDERED[t], ORDERED[t + 8]]);
+  const tiles = Array.from({ length: 8 }, (_, t) => [ORDERED[t], ORDERED[t + 10]]);
   return (
     <>
       <div className="w-full border-t border-white/[0.08] md:hidden">

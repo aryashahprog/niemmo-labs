@@ -9,8 +9,7 @@ import Industries from "@/components/Industries";
 import ClosingCta from "@/components/ClosingCta";
 import Footer from "@/components/Footer";
 import { PrimaryButton, SecondaryButton } from "@/components/Buttons";
-import Link from "next/link";
-import DocCollectionDemo from "@/components/DocCollectionDemo";
+import WorkflowDemo from "@/components/WorkflowDemo";
 import { CAPABILITIES, CTA, STEPS, TOOL_TYPES } from "@/lib/site";
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -188,21 +187,14 @@ export default function Home() {
                   One workflow, <span className="text-white/60">step by step.</span>
                 </h2>
                 <p className="max-w-sm text-sm leading-relaxed text-white/70 md:pb-1 md:text-base">
-                  Month-end document collection for a bookkeeping practice. Step through to see what runs on its own and
-                  what reaches staff.
+                  Choose clinic intake or a bookkeeping close, then step through what runs on its own and what reaches
+                  staff.
                 </p>
               </div>
             </Reveal>
             <Reveal y={20}>
-              <DocCollectionDemo />
+              <WorkflowDemo />
             </Reveal>
-            <Link
-              href="/industries/accounting/"
-              className="hit-area group mt-6 inline-flex items-center gap-2 rounded-sm text-xs font-medium uppercase tracking-widest text-white/70 transition-colors hover:text-white"
-            >
-              Explore accounting workflows
-              <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </Link>
           </div>
         </section>
 

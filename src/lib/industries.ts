@@ -24,6 +24,33 @@ export type Industry = {
 
 export const INDUSTRIES: Industry[] = [
   {
+    slug: "healthcare",
+    name: "Clinics & Private Practices",
+    short: "Clinics",
+    color: "#00D4AA",
+    featured: true,
+    audience: "Independent clinics and private practices",
+    summary: "Less front-desk paperwork before, between and after appointments.",
+    workflows: [
+      { title: "Patient intake", body: "Intake forms and documents collected before the visit, checked for missing fields, with reminders until complete." },
+      { title: "Confirmations and rescheduling", body: "Appointment confirmations sent through your scheduling tools, with reschedule requests routed to the front desk." },
+      { title: "Referral paperwork", body: "Incoming referrals read, sorted to the right queue and checked for missing documents before staff pick them up." },
+      { title: "Follow-ups and EMR handoffs", body: "Outstanding paperwork and callbacks tracked, and details prepared for staff to confirm in the EMR." },
+    ],
+    tools: ["EMR / EHR", "Practice management", "Scheduling", "E-fax", "Email & SMS"],
+    example: {
+      name: "New patient intake",
+      trigger: "A new patient books a visit.",
+      steps: [
+        "The practice’s own intake forms go out by text or email.",
+        "Responses are checked for missing fields, with reminders until they’re complete.",
+        "Completed details are prepared for the patient record.",
+      ],
+      review: "Front-desk staff review flagged items, such as an unreadable insurance card, and approve what goes into the EMR. Clinical questions stay with clinicians.",
+      result: "The patient arrives with paperwork done and the front desk knows what’s still outstanding.",
+    },
+  },
+  {
     slug: "accounting",
     name: "Accounting & Bookkeeping",
     short: "Accounting",
@@ -129,34 +156,6 @@ export const INDUSTRIES: Industry[] = [
       ],
       review: "The account or project manager reviews the setup and approves the handoff.",
       result: "The team starts with the project set up, the right access and a clear brief.",
-    },
-  },
-  {
-    slug: "healthcare",
-    name: "Healthcare",
-    short: "Healthcare",
-    color: "#00D4AA",
-    audience: "Independent practices and clinics",
-    summary:
-      "Front-desk and administrative workflows for independent practices, built to work alongside your EMR and scheduling tools.",
-    workflows: [
-      { title: "Patient intake", body: "Collect forms, insurance details and history before the visit, then file them to the patient record." },
-      { title: "Appointment scheduling", body: "Offer open slots, confirm bookings, send reminders and handle reschedule requests." },
-      { title: "Referral routing", body: "Read incoming referrals, match them to the right provider and flag missing information." },
-      { title: "Administrative follow-ups", body: "Track outstanding paperwork, authorizations and callbacks so nothing sits in a queue." },
-      { title: "EMR workflows", body: "Move structured data between your EMR and connected tools, with staff reviewing where judgment is needed." },
-    ],
-    tools: ["EMR / EHR", "Practice management", "Scheduling", "E-fax", "Email & SMS"],
-    example: {
-      name: "New patient intake",
-      trigger: "A new patient books an appointment online.",
-      steps: [
-        "Intake forms and insurance questions go out by text or email.",
-        "Responses are checked for missing fields, with reminders until they’re complete.",
-        "Completed details are prepared for the patient record.",
-      ],
-      review: "Front-desk staff review flagged items, such as unclear insurance details, before anything is filed.",
-      result: "The patient arrives with paperwork done and the record ready for the visit.",
     },
   },
   {

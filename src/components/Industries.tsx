@@ -76,7 +76,7 @@ export default function Industries() {
                     tabIndex={on ? 0 : -1}
                     onClick={() => select(i)}
                     onKeyDown={onKey}
-                    className={`group flex w-full items-center gap-3 rounded-md border px-4 py-3 text-left transition-colors lg:gap-4 lg:rounded-sm lg:border-0 lg:p-0 ${
+                    className={`group flex w-full items-center gap-3 rounded-md border px-4 py-3 last:odd:col-span-2 lg:last:odd:col-span-1 text-left transition-colors lg:gap-4 lg:rounded-sm lg:border-0 lg:p-0 ${
                       on ? "border-white/30 bg-white/[0.06] lg:bg-transparent" : "border-white/[0.1] lg:bg-transparent"
                     }`}
                   >
