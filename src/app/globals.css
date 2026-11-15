@@ -1,26 +1,156 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-geist-sans), "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-pixel: var(--font-geist-pixel-line), ui-monospace, monospace;
+  --font-display: var(--font-inter), "Inter", ui-sans-serif, sans-serif;
+  --color-ink: #161616;
+  --color-ink-deep: #0a0a0a;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: #0a0a0a;
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #161616;
+  color: #fff;
+  font-family: var(--font-sans);
+  overscroll-behavior-x: none;
+  min-height: 100vh;
 }
+
+::selection {
+  background: rgba(255, 255, 255, 0.85);
+  color: #111;
+}
+
+.skip-link {
+  position: fixed;
+  left: 16px;
+  top: -60px;
+  z-index: 100;
+  background: #fff;
+  color: #111;
+  padding: 10px 14px;
+  font-size: 13px;
+  border-radius: 4px;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 16px;
+}
+
+:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.text-glow-metallic {
+  color: #fff;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 8px #e1e8f273) drop-shadow(0 0 25px #c8d4e638)
+    drop-shadow(0 0 50px #b4c3de1a);
+  background: linear-gradient(90deg, #eeecea, #fff 24%, #eaedf4 46%, #fff 70%, #f0edea);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Scroll reveal: content is only hidden when JS is running. */
+.hero-in {
+  animation: hero-in 1.1s var(--ease-out-quint) both;
+}
+@keyframes hero-in {
+  from {
+    opacity: 0.02;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(var(--ry, 0px));
+  transition:
+    opacity var(--rd, 1s) var(--ease-out-quint) var(--delay, 0s),
+    transform var(--rd, 1s) var(--ease-out-quint) var(--delay, 0s);
+}
+html.js [data-reveal][data-in="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+.marquee-track {
+  animation: marquee-left 40s linear infinite;
+}
+.marquee-track.reverse {
+  animation-name: marquee-right;
+}
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+.animate-bob {
+  animation: bob 2s ease-in-out infinite;
+}
+
+.smoke-mask {
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 10%, transparent 65%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 50%, black 10%, transparent 65%);
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  html.js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .marquee-track,
+  .animate-bob {
+    animation: none !important;
+  }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@keyframes menu-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.panel-in { animation: panel-in 0.6s var(--ease-out-quint) both; }
+@keyframes number-in {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 0.07; transform: none; }
+}
+.industry-number { opacity: 0.07; animation: number-in 0.8s var(--ease-out-quint) both; }
