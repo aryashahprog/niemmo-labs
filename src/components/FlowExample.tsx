@@ -1,6 +1,6 @@
 import type { FlowExample as Flow } from "@/lib/industries";
 
-const STAGES = ["Trigger", "Automated steps", "Human review", "Result"] as const;
+const STAGES = ["Trigger", "Automated steps", "Human review", "Expected output"] as const;
 
 /** Illustrative workflow: trigger → automated steps → human review → result. Not a client deployment. */
 export default function FlowExample({ flow, color, headingId }: { flow: Flow; color: string; headingId?: string }) {
@@ -49,9 +49,6 @@ export default function FlowExample({ flow, color, headingId }: { flow: Flow; co
           </li>
         ))}
       </ol>
-      <p className="border-t border-white/[0.08] px-6 py-4 text-xs leading-relaxed text-white/55 md:px-8">
-        An example of a workflow we can build, not a description of a client deployment or an existing product.
-      </p>
     </div>
   );
 }

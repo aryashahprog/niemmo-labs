@@ -9,7 +9,7 @@ import ContactForm from "@/components/ContactForm";
 const NEXT_STEPS = [
   { label: "First conversation", body: "We talk through your business and the work that slows your team down." },
   { label: "Workflow review", body: "We look at how that work happens today, who does it and which tools it touches." },
-  { label: "Proposed scope", body: "We suggest what to automate first and outline how we would build it." },
+  { label: "Proposed scope", body: "We suggest one workflow to start with and outline a scoped pilot." },
 ];
 
 export const metadata: Metadata = {

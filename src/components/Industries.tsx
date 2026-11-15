@@ -2,31 +2,22 @@
 
 import Link from "next/link";
 import { useRef, useState, type KeyboardEvent } from "react";
-import { INDUSTRIES } from "@/lib/industries";
+import { FEATURED_INDUSTRIES as LIST } from "@/lib/industries";
 
 const pad = (n: number) => String(n).padStart(2, "0");
-const FEATURED = [0, 1, 2];
 
 export default function Industries() {
   const [active, setActive] = useState(0);
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
-  const mobileTabs = useRef<(HTMLButtonElement | null)[]>([]);
-  const ind = INDUSTRIES[active];
-  const n = INDUSTRIES.length;
+  const ind = LIST[active];
+  const n = LIST.length;
 
-  const select = (i: number, focus?: "desktop" | "mobile") => {
+  const select = (i: number, focus?: boolean) => {
     setActive(i);
-    const list = focus === "mobile" ? mobileTabs.current : tabs.current;
-    if (focus) list[i]?.focus({ preventScroll: true });
-    const tab = mobileTabs.current[i];
-    const strip = tab?.parentElement;
-    if (tab && strip && strip.clientWidth) {
-      const offset = tab.getBoundingClientRect().left - strip.getBoundingClientRect().left + strip.scrollLeft;
-      strip.scrollTo({ left: offset - (strip.clientWidth - tab.offsetWidth) / 2, behavior: "smooth" });
-    }
+    if (focus) tabs.current[i]?.focus({ preventScroll: true });
   };
 
-  const onKey = (e: KeyboardEvent, which: "desktop" | "mobile") => {
+  const onKey = (e: KeyboardEvent) => {
     const map: Record<string, number> = {
       ArrowDown: active + 1,
       ArrowRight: active + 1,
@@ -37,7 +28,7 @@ export default function Industries() {
     };
     if (!(e.key in map)) return;
     e.preventDefault();
-    select((map[e.key] + n) % n, which);
+    select((map[e.key] + n) % n, true);
   };
 
   return (
@@ -62,12 +53,15 @@ export default function Industries() {
         </span>
       </div>
 
-      <div className="relative mx-auto w-full max-w-7xl px-6 pb-28 pt-[6vh] md:px-10 md:pb-36 lg:pt-[12vh]">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-20">
-          {/* Desktop: vertical tab list */}
-          <div className="hidden flex-col justify-center lg:flex">
-            <div role="tablist" aria-label="Industries" aria-orientation="vertical" className="space-y-3">
-              {INDUSTRIES.map((it, i) => {
+      <div className="relative mx-auto w-full max-w-7xl px-6 pb-20 pt-[6vh] md:px-10 md:pb-28 lg:pt-[10vh]">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-20">
+          <div className="flex flex-col justify-center">
+            <div
+              role="tablist"
+              aria-label="Industries"
+              className="grid grid-cols-2 gap-2 lg:grid-cols-1 lg:gap-0 lg:space-y-4"
+            >
+              {LIST.map((it, i) => {
                 const on = i === active;
                 return (
                   <button
@@ -81,19 +75,21 @@ export default function Industries() {
                     aria-controls="industry-panel"
                     tabIndex={on ? 0 : -1}
                     onClick={() => select(i)}
-                    onKeyDown={(e) => onKey(e, "desktop")}
-                    className="group flex w-full items-center gap-4 rounded-sm text-left"
+                    onKeyDown={onKey}
+                    className={`group flex w-full items-center gap-3 rounded-md border px-4 py-3 text-left transition-colors lg:gap-4 lg:rounded-sm lg:border-0 lg:p-0 ${
+                      on ? "border-white/30 bg-white/[0.06] lg:bg-transparent" : "border-white/[0.1] lg:bg-transparent"
+                    }`}
                   >
                     <span
                       aria-hidden="true"
-                      className="w-[3px] shrink-0 self-stretch rounded-full transition-all duration-500"
+                      className="hidden w-[3px] shrink-0 self-stretch rounded-full transition-all duration-500 lg:block"
                       style={{ backgroundColor: on ? it.color : "transparent", transform: on ? "scaleY(1)" : "scaleY(0)" }}
                     />
+                    <span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 rounded-full lg:hidden" style={{ backgroundColor: it.color }} />
                     <span
-                      className={`font-light leading-[1.05] tracking-tight transition-all duration-500 ${
-                        on ? "translate-x-0 text-white" : "-translate-x-2 text-white/45 group-hover:text-white/60"
+                      className={`text-sm font-normal leading-tight transition-all duration-500 lg:text-[clamp(26px,2.65vw,40px)] lg:font-light lg:leading-[1.05] lg:tracking-tight ${
+                        on ? "text-white lg:translate-x-0" : "text-white/70 lg:-translate-x-2 lg:text-white/45 lg:group-hover:text-white/60"
                       }`}
-                      style={{ fontSize: "clamp(26px, 2.65vw, 40px)" }}
                     >
                       {it.name}
                     </span>
@@ -101,87 +97,12 @@ export default function Industries() {
                 );
               })}
             </div>
-          </div>
-
-          {/* Mobile/tablet: horizontal tab strip */}
-          <div className="-mx-6 lg:hidden">
-            <div className="mb-5 grid grid-cols-3 gap-2 px-6">
-              {FEATURED.map((i) => {
-                const it = INDUSTRIES[i];
-                const on = i === active;
-                return (
-                  <button
-                    key={it.slug}
-                    type="button"
-                    aria-pressed={on}
-                    aria-controls="industry-panel"
-                    onClick={() => select(i)}
-                    className={`rounded-md border px-3 py-3 text-left text-[13px] leading-tight transition-colors ${
-                      on ? "border-white/30 bg-white/[0.06] text-white" : "border-white/[0.1] text-white/70"
-                    }`}
-                  >
-                    <span aria-hidden="true" className="mb-2 block h-1.5 w-1.5 rounded-full" style={{ backgroundColor: it.color }} />
-                    {it.short}
-                  </button>
-                );
-              })}
-            </div>
-            <div className="mb-1 flex items-center justify-between gap-3 px-6">
-              <p className="font-pixel text-[11px] uppercase tracking-[0.2em] text-white/55">
-                All {n} · swipe <span aria-hidden="true">→</span>
-              </p>
-              <label htmlFor="industry-jump" className="sr-only">
-                Jump to an industry
-              </label>
-              <select
-                id="industry-jump"
-                value={active}
-                onChange={(e) => select(Number(e.target.value))}
-                className="max-w-[60%] rounded-sm border border-white/[0.15] bg-black/40 px-2 py-2 text-xs text-white/80"
-              >
-                {INDUSTRIES.map((it, i) => (
-                  <option key={it.slug} value={i}>
-                    {pad(i + 1)} {it.short}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="relative">
-            <div
-              role="tablist"
-              aria-label="Industries"
-              className="no-scrollbar flex snap-x gap-6 overflow-x-auto px-6 pb-2"
-            >
-              {INDUSTRIES.map((it, i) => {
-                const on = i === active;
-                return (
-                  <button
-                    key={it.slug}
-                    ref={(el) => {
-                      mobileTabs.current[i] = el;
-                    }}
-                    role="tab"
-                    aria-selected={on}
-                    aria-controls="industry-panel"
-                    tabIndex={on ? 0 : -1}
-                    onClick={() => select(i, "mobile")}
-                    onKeyDown={(e) => onKey(e, "mobile")}
-                    className={`relative shrink-0 snap-start whitespace-nowrap py-3 text-2xl font-light tracking-tight transition-colors ${
-                      on ? "text-white" : "text-white/45"
-                    }`}
-                  >
-                    {it.short}
-                    <span
-                      aria-hidden="true"
-                      className="absolute inset-x-0 bottom-0 h-[2px] rounded-full transition-opacity"
-                      style={{ backgroundColor: it.color, opacity: on ? 1 : 0 }}
-                    />
-                  </button>
-                );
-              })}
-            </div>
-            <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 w-14 bg-gradient-to-l from-[#161616] to-transparent" />
-            </div>
+            <p className="mt-6 text-sm text-white/60 lg:mt-12">
+              Other workflows?{" "}
+              <Link href="/contact/" className="hit-area rounded-sm text-white/80 underline underline-offset-4 transition-colors hover:text-white">
+                Let’s talk.
+              </Link>
+            </p>
           </div>
 
           <div className="flex flex-col justify-center">
@@ -216,19 +137,7 @@ export default function Industries() {
                   ))}
                 </ol>
               </div>
-              <div className="mt-7 flex items-center justify-between gap-4">
-                <div className="flex items-center gap-1.5" aria-hidden="true">
-                  {INDUSTRIES.map((it, i) => (
-                    <span
-                      key={it.slug}
-                      className="h-1.5 w-1.5 rounded-full transition-all duration-500"
-                      style={{
-                        backgroundColor: i === active ? ind.color : "rgba(255,255,255,0.12)",
-                        opacity: i === active ? 0.9 : 0.6,
-                      }}
-                    />
-                  ))}
-                </div>
+              <div className="mt-7 flex justify-end">
                 <Link
                   href={`/industries/${ind.slug}/`}
                   className="hit-area group inline-flex items-center gap-2 rounded-sm text-xs font-medium uppercase tracking-widest text-white/70 transition-colors hover:text-white"
@@ -240,37 +149,8 @@ export default function Industries() {
                 </Link>
               </div>
             </div>
-            <div aria-hidden="true" className="mt-6 hidden space-y-[6px] px-6 opacity-60 lg:block">
-              {ind.workflows.map((w, i) => (
-                <div key={`${ind.slug}-${i}`} className="flex gap-[6px]" style={{ paddingLeft: `${(i % 3) * 24}px` }}>
-                  <span className="h-[7px] rounded-[1px]" style={{ width: `${40 + w.title.length * 3}px`, backgroundColor: `${ind.color}14` }} />
-                  <span className="h-[7px] rounded-[1px]" style={{ width: `${30 + w.body.length}px`, backgroundColor: `${ind.color}0d` }} />
-                </div>
-              ))}
-            </div>
           </div>
         </div>
-      </div>
-
-      <div className="absolute bottom-10 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2 md:bottom-12" aria-hidden="true">
-        {INDUSTRIES.map((it, i) => (
-          <button
-            key={it.slug}
-            tabIndex={-1}
-            onClick={() => select(i)}
-            className="-my-[3px] py-[11px]"
-          >
-            <span
-              className="block h-[3px] w-6 overflow-hidden rounded-full md:w-9"
-              style={{ backgroundColor: "rgba(255,255,255,0.06)" }}
-            >
-              <span
-                className="block h-full rounded-full transition-all duration-500"
-                style={{ backgroundColor: it.color, opacity: i <= active ? 0.6 : 0, width: i <= active ? "100%" : "0%" }}
-              />
-            </span>
-          </button>
-        ))}
       </div>
     </div>
   );

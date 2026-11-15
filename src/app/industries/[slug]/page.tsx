@@ -7,7 +7,7 @@ import SectionLabel from "@/components/SectionLabel";
 import ClosingCta from "@/components/ClosingCta";
 import FlowExample from "@/components/FlowExample";
 import Footer from "@/components/Footer";
-import { INDUSTRIES, getIndustry } from "@/lib/industries";
+import { FEATURED_INDUSTRIES, INDUSTRIES, getIndustry } from "@/lib/industries";
 import { STEPS } from "@/lib/site";
 
 const pad = (n: number) => String(n).padStart(2, "0");
@@ -31,9 +31,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function IndustryPage({ params }: { params: Promise<{ slug: string }> }) {
   const ind = getIndustry((await params).slug);
   if (!ind) notFound();
-  const idx = INDUSTRIES.indexOf(ind);
-  const prev = INDUSTRIES[(idx - 1 + INDUSTRIES.length) % INDUSTRIES.length];
-  const next = INDUSTRIES[(idx + 1) % INDUSTRIES.length];
+  const ring = FEATURED_INDUSTRIES;
+  const idx = ring.indexOf(ind);
+  const featured = idx >= 0;
+  const prev = ring[(idx - 1 + ring.length) % ring.length];
+  const next = ring[(idx + 1) % ring.length];
 
   return (
     <div className="relative min-h-screen w-full bg-[#161616] text-white">
@@ -45,16 +47,18 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             className="pointer-events-none absolute inset-0"
             style={{ background: `radial-gradient(ellipse 60% 55% at 70% 35%, ${ind.color}24 0%, transparent 70%)` }}
           />
-          <div aria-hidden="true" className="pointer-events-none absolute right-[4vw] top-24 hidden select-none font-pixel md:block" style={{ fontSize: "clamp(160px, 28vw, 420px)", lineHeight: 0.85, color: ind.color, opacity: 0.07 }}>
-            {pad(idx + 1)}
-          </div>
+          {featured && (
+            <div aria-hidden="true" className="pointer-events-none absolute right-[4vw] top-24 hidden select-none font-pixel md:block" style={{ fontSize: "clamp(160px, 28vw, 420px)", lineHeight: 0.85, color: ind.color, opacity: 0.07 }}>
+              {pad(idx + 1)}
+            </div>
+          )}
           <div className="relative mx-auto max-w-7xl">
             <Reveal immediate>
               <nav aria-label="Breadcrumb" className="mb-10 font-pixel text-[11px] uppercase tracking-[0.3em] text-white/45">
                 <Link href="/#industries" className="hit-area rounded-sm transition-colors hover:text-white/60">
                   Industries
                 </Link>{" "}
-                / <span style={{ color: ind.color }}>{pad(idx + 1)}</span>
+                / <span style={{ color: ind.color }}>{featured ? pad(idx + 1) : "More"}</span>
               </nav>
             </Reveal>
             <Reveal immediate y={20} delay={0.1}>
@@ -108,9 +112,6 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                 </p>
               </li>
             </ol>
-            <p className="mt-6 text-xs leading-relaxed text-white/50">
-              Workflows described here illustrate what can be built; they are not past client deployments.
-            </p>
           </div>
         </section>
 
@@ -144,7 +145,8 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
           </div>
         </section>
 
-        <nav aria-label="More industries" className="px-6 pt-24 md:px-10 md:pt-32">
+        <nav aria-label={featured ? "More industries" : "Industries we focus on"} className="px-6 pt-24 md:px-10 md:pt-32">
+          {featured ? (
           <div className="mx-auto grid max-w-7xl grid-cols-2 border-y border-white/[0.08]">
             {[
               { label: "Previous", it: prev, align: "text-left" },
@@ -162,6 +164,21 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
               </Link>
             ))}
           </div>
+          ) : (
+            <div className="mx-auto max-w-7xl">
+              <SectionLabel>Industries we focus on</SectionLabel>
+              <ul className="grid grid-cols-1 border-t border-white/[0.08] sm:grid-cols-2 lg:grid-cols-4">
+                {ring.map((it) => (
+                  <li key={it.slug} className="border-b border-white/[0.08]">
+                    <Link href={`/industries/${it.slug}/`} className="group flex items-center gap-3 py-6 pr-4">
+                      <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: it.color }} />
+                      <span className="text-xl font-light tracking-tight text-white/70 transition-colors group-hover:text-white">{it.name}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
         </nav>
 
         <ClosingCta />

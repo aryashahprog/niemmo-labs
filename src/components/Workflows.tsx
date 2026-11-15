@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { INDUSTRIES } from "@/lib/industries";
+import { FEATURED_INDUSTRIES as INDUSTRIES } from "@/lib/industries";
 
 type Item = { title: string; color: string };
 
 const ALL: Item[] = INDUSTRIES.flatMap((ind) => ind.workflows.map((w) => ({ title: w.title, color: ind.color })));
 // interleave industries so neighbouring items differ
 const ORDERED: Item[] = [];
-for (let i = 0; i < 5; i++) INDUSTRIES.forEach((ind) => ORDERED.push({ title: ind.workflows[i].title, color: ind.color }));
-const ROW_A = ORDERED.slice(0, 25);
-const ROW_B = ORDERED.slice(25);
+for (let i = 0; i < 4; i++) INDUSTRIES.forEach((ind) => ORDERED.push({ title: ind.workflows[i].title, color: ind.color }));
+const ROW_A = ORDERED.slice(0, 8);
+const ROW_B = ORDERED.slice(8);
 
 function Row({ items, reverse }: { items: Item[]; reverse?: boolean }) {
   return (
@@ -80,7 +80,7 @@ function FlipTile({ items, offset }: { items: Item[]; offset: number }) {
 }
 
 export default function Workflows() {
-  const tiles = Array.from({ length: 8 }, (_, t) => [ORDERED[t], ORDERED[t + 10], ORDERED[t + 20]]);
+  const tiles = Array.from({ length: 8 }, (_, t) => [ORDERED[t], ORDERED[t + 8]]);
   return (
     <>
       <div className="w-full border-t border-white/[0.08] md:hidden">

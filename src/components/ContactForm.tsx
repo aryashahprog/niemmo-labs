@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { INDUSTRIES } from "@/lib/industries";
+import { FEATURED_INDUSTRIES } from "@/lib/industries";
 import { CONTACT } from "@/lib/site";
 
 type Status =
@@ -99,7 +99,7 @@ export default function ContactForm() {
           <label htmlFor="industry" className={label}>Industry</label>
           <select id="industry" name="industry" className={`${field} appearance-none`} defaultValue="">
             <option value="">Select an industry</option>
-            {INDUSTRIES.map((i) => (
+            {FEATURED_INDUSTRIES.map((i) => (
               <option key={i.slug} value={i.name}>{i.name}</option>
             ))}
             <option value="Other">Other</option>

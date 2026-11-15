@@ -18,9 +18,119 @@ export type Industry = {
   workflows: Workflow[];
   tools: string[];
   example: FlowExample;
+  /** Shown on the homepage and in primary industry navigation. */
+  featured?: boolean;
 };
 
 export const INDUSTRIES: Industry[] = [
+  {
+    slug: "accounting",
+    name: "Accounting & Bookkeeping",
+    short: "Accounting",
+    color: "#B48CFF",
+    featured: true,
+    audience: "Accounting firms and bookkeeping practices",
+    summary: "Less chasing for documents, and a clear view of where every client stands at month-end.",
+    workflows: [
+      { title: "Client document collection", body: "Recurring checklists built from your engagement templates, with reminders until every item is in." },
+      { title: "Client onboarding setup", body: "New engagements turned into client folders, checklists and tasks in the tools your firm already uses." },
+      { title: "Invoice data for review", body: "Bills and receipts read into structured entries, prepared for a bookkeeper to approve." },
+      { title: "Month-end status reporting", body: "A regular summary of which clients are complete, waiting on documents or ready for review." },
+    ],
+    tools: ["Accounting software", "Client portal", "Document storage", "Spreadsheets", "Email"],
+    example: {
+      name: "Client document collection",
+      trigger: "A client’s month-end checklist opens, built from the firm’s approved engagement template.",
+      steps: [
+        "Requests for statements and receipts go out through the firm’s approved portal or channel.",
+        "Incoming files are matched to the right client and period, and the missing-items tracker updates.",
+        "Scheduled reminders go out for anything still outstanding.",
+      ],
+      review: "Staff check mismatched or unreadable files. Advice, filings and payments stay with the firm.",
+      result: "An organized document set for each client, and a tracker that shows exactly what’s still missing.",
+    },
+  },
+  {
+    slug: "real-estate",
+    name: "Property Management",
+    short: "Property Management",
+    color: "#E8553D",
+    featured: true,
+    audience: "Residential and commercial property managers",
+    summary: "Keep maintenance requests, vendor paperwork and owner reporting organized across every property.",
+    workflows: [
+      { title: "Maintenance inbox to work order", body: "Tenant emails and forms turned into structured requests, ready for a manager to act on." },
+      { title: "Vendor document tracking", body: "Insurance certificates and tax forms kept on file, with reminders before anything expires." },
+      { title: "Invoice coding drafts", body: "Vendor invoices read and coded to the right property and account, then queued for approval." },
+      { title: "Owner report assembly", body: "Statements, work-order summaries and notes gathered into a draft owner report for review." },
+    ],
+    tools: ["Property management software", "Tenant portal & email", "Accounting", "Document storage", "Spreadsheets"],
+    example: {
+      name: "Maintenance inbox to work order",
+      trigger: "A tenant emails or submits a form about a maintenance issue.",
+      steps: [
+        "The message becomes a structured request tied to the property and unit.",
+        "Missing photos or details are requested from the tenant.",
+        "The request is classified using rules the manager approves, and anything that looks urgent is flagged for immediate human handling.",
+      ],
+      review: "The manager approves the vendor assignment. Emergencies and tenant decisions stay with your team.",
+      result: "A work order with its status kept in sync, and a completion summary ready when the job closes.",
+    },
+  },
+  {
+    slug: "home-services",
+    name: "Home Services",
+    short: "Home Services",
+    color: "#F5A623",
+    featured: true,
+    audience: "HVAC, plumbing, electrical and commercial cleaning businesses",
+    summary: "Less office admin between the quote, the job and the invoice.",
+    workflows: [
+      { title: "Quote-to-job admin", body: "Accepted quotes turned into scheduled jobs and checklists, with the office confirming each step." },
+      { title: "Incoming lead routing", body: "Calls, web forms and messages logged in your CRM and routed to the right person." },
+      { title: "Supplier invoice capture", body: "Supplier bills read and matched to jobs, ready for the office to review." },
+      { title: "Technician paperwork summaries", body: "Job notes, photos and forms from the field condensed into a clear summary for the office." },
+    ],
+    tools: ["Field service software", "CRM", "Phone & SMS", "Accounting", "Spreadsheets"],
+    example: {
+      name: "Quote-to-job admin",
+      trigger: "A quote is sent from your existing CRM or field service software.",
+      steps: [
+        "Follow-ups run only where your software’s built-in reminders leave a gap.",
+        "Customer replies are routed to the office with the quote attached.",
+        "An accepted quote creates a job checklist, and completion paperwork becomes an invoice draft.",
+      ],
+      review: "The office confirms the schedule and approves the invoice. Pricing and discounts are always set by your team.",
+      result: "Accepted quotes become scheduled jobs and ready-to-review invoice drafts without re-keying.",
+    },
+  },
+  {
+    slug: "professional-services",
+    name: "Agencies & Consulting",
+    short: "Agencies & Consulting",
+    color: "#5B8DEF",
+    featured: true,
+    audience: "Marketing, creative and consulting firms",
+    summary: "Spend less time coordinating client work.",
+    workflows: [
+      { title: "Signed client to project kickoff", body: "A signed agreement sets up the project, folders and kickoff steps your team has approved." },
+      { title: "Client report assembly", body: "Data and updates gathered into a draft report for your team to review before it goes out." },
+      { title: "Meeting actions to tracker", body: "Action items from meeting notes added to your project tracker with owners and dates." },
+      { title: "Invoice reminders and receivables", body: "Reminders on overdue invoices and a clear view of what’s outstanding." },
+    ],
+    tools: ["CRM", "Project management", "Document storage", "E-signature", "Email & calendar"],
+    example: {
+      name: "Signed client to project kickoff",
+      trigger: "A client signs the agreement.",
+      steps: [
+        "A structured intake captures scope, contacts and key dates.",
+        "Approved folder and project templates are created.",
+        "A kickoff email is drafted, access requests go out through approved channels and missing inputs are flagged.",
+      ],
+      review: "The account or project manager reviews the setup and approves the handoff.",
+      result: "The team starts with the project set up, the right access and a clear brief.",
+    },
+  },
   {
     slug: "healthcare",
     name: "Healthcare",
@@ -47,114 +157,6 @@ export const INDUSTRIES: Industry[] = [
       ],
       review: "Front-desk staff review flagged items, such as unclear insurance details, before anything is filed.",
       result: "The patient arrives with paperwork done and the record ready for the visit.",
-    },
-  },
-  {
-    slug: "home-services",
-    name: "Home Services",
-    short: "Home Services",
-    color: "#F5A623",
-    audience: "HVAC, plumbing, electrical and cleaning businesses",
-    summary: "Keep leads, estimates and jobs moving from the first call to the finished job.",
-    workflows: [
-      { title: "Lead intake", body: "Capture calls, web forms and messages in one place and respond while the lead is still warm." },
-      { title: "Estimate follow-ups", body: "Follow up on open estimates on a schedule and alert the team when a customer replies." },
-      { title: "Job scheduling", body: "Book jobs into open slots based on job type, location and technician availability." },
-      { title: "Dispatch coordination", body: "Update technicians and customers when jobs change, and keep the dispatch board current." },
-      { title: "Customer reminders", body: "Send appointment confirmations, arrival notices and seasonal maintenance reminders." },
-    ],
-    tools: ["Field service software", "CRM", "Phone & SMS", "Calendar", "Accounting"],
-    example: {
-      name: "Estimate follow-up",
-      trigger: "A technician sends an estimate after a site visit.",
-      steps: [
-        "Follow-ups go out by text and email on a set schedule.",
-        "Customer replies are sorted into questions, approvals and declines.",
-        "Approved estimates become a job request with the details attached.",
-      ],
-      review: "The office confirms the time slot and technician before the job is booked.",
-      result: "Every open estimate gets followed up, and approved work goes straight to scheduling.",
-    },
-  },
-  {
-    slug: "professional-services",
-    name: "Professional Services",
-    short: "Professional Services",
-    color: "#5B8DEF",
-    audience: "Consulting firms and agencies",
-    summary: "Spend less time coordinating client work.",
-    workflows: [
-      { title: "Client onboarding", body: "Send agreements, gather details and set up projects and folders as soon as a client signs." },
-      { title: "Document collection", body: "Request files, track what’s outstanding and send reminders until everything is in." },
-      { title: "Meeting follow-ups", body: "Turn meeting notes into summaries, action items and tasks in your project tool." },
-      { title: "Project handoffs", body: "Pass context, files and next steps cleanly from sales to delivery and between teams." },
-      { title: "Recurring reporting", body: "Pull data from your systems and assemble client-ready reports on a schedule." },
-    ],
-    tools: ["CRM", "Project management", "Document storage", "E-signature", "Email & calendar"],
-    example: {
-      name: "Client onboarding",
-      trigger: "A client signs the engagement agreement.",
-      steps: [
-        "The project, folders and task list are created from your template.",
-        "A welcome email goes out with a checklist of documents needed.",
-        "Uploads are tracked, with reminders for anything missing.",
-      ],
-      review: "The account lead reviews the setup and approves the kickoff email.",
-      result: "Delivery starts with the files and context in one place.",
-    },
-  },
-  {
-    slug: "real-estate",
-    name: "Real Estate & Property Management",
-    short: "Real Estate",
-    color: "#E8553D",
-    audience: "Brokerages, property managers and landlords",
-    summary: "Respond to inquiries, tenants and maintenance faster without adding to the front office.",
-    workflows: [
-      { title: "Inquiry routing", body: "Answer common listing questions and route qualified inquiries to the right agent or manager." },
-      { title: "Viewing coordination", body: "Schedule showings around availability and send confirmations and directions." },
-      { title: "Maintenance requests", body: "Log requests with photos, sort them by urgency and assign vendors or staff." },
-      { title: "Tenant communications", body: "Send notices, renewal reminders and updates through one consistent channel." },
-      { title: "Document organization", body: "File leases, applications and inspection reports to the right property and tenant." },
-    ],
-    tools: ["Property management software", "CRM", "Listings", "Email & SMS", "Document storage"],
-    example: {
-      name: "Maintenance request",
-      trigger: "A tenant submits a maintenance request with photos.",
-      steps: [
-        "The request is logged against the right property and unit.",
-        "An urgency level is suggested from the description and photos.",
-        "An available vendor is contacted and the tenant gets a confirmation.",
-      ],
-      review: "The property manager approves urgent jobs and anything above a set cost.",
-      result: "Every request has an owner, a status and a record.",
-    },
-  },
-  {
-    slug: "accounting",
-    name: "Accounting & Bookkeeping",
-    short: "Accounting",
-    color: "#B48CFF",
-    audience: "Accounting firms and bookkeeping practices",
-    summary: "Cut down the chasing and sorting that builds up around every close and filing season.",
-    workflows: [
-      { title: "Client document collection", body: "Request statements and receipts, track what’s missing and follow up automatically." },
-      { title: "Invoice processing", body: "Read invoices, extract key fields and prepare entries for review in your accounting system." },
-      { title: "Transaction review queues", body: "Categorize routine transactions and surface the unusual ones for a person to review." },
-      { title: "Deadline reminders", body: "Track filing and payment deadlines per client and send reminders well ahead of time." },
-      { title: "Reporting preparation", body: "Assemble recurring reports and workpapers from your ledger and client data." },
-    ],
-    tools: ["Accounting software", "Client portal", "Spreadsheets", "Document storage", "Email"],
-    example: {
-      name: "Month-end document collection",
-      trigger: "A client’s month-end close date is approaching.",
-      steps: [
-        "The client gets a list of the statements and receipts still needed.",
-        "Uploads are matched to the checklist, with reminders for gaps.",
-        "Documents are filed to the client folder and staged for review.",
-      ],
-      review: "A bookkeeper reviews anything unreadable or unmatched.",
-      result: "The close starts with a complete set of documents.",
     },
   },
   {
@@ -295,3 +297,6 @@ export const INDUSTRIES: Industry[] = [
 ];
 
 export const getIndustry = (slug: string) => INDUSTRIES.find((i) => i.slug === slug);
+
+export const FEATURED_INDUSTRIES = INDUSTRIES.filter((i) => i.featured);
+export const OTHER_INDUSTRIES = INDUSTRIES.filter((i) => !i.featured);

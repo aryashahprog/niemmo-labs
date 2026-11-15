@@ -10,12 +10,10 @@ import ClosingCta from "@/components/ClosingCta";
 import Footer from "@/components/Footer";
 import { PrimaryButton, SecondaryButton } from "@/components/Buttons";
 import Link from "next/link";
-import FlowExample from "@/components/FlowExample";
+import DocCollectionDemo from "@/components/DocCollectionDemo";
 import { CAPABILITIES, CTA, STEPS, TOOL_TYPES } from "@/lib/site";
-import { INDUSTRIES } from "@/lib/industries";
 
 const pad = (n: number) => String(n).padStart(2, "0");
-const CLINIC = INDUSTRIES[0];
 
 export default function Home() {
   return (
@@ -44,8 +42,8 @@ export default function Home() {
                 </h1>
                 <div className="hero-in max-w-sm md:pb-1" style={{ animationDelay: "0.45s" }}>
                   <p className="text-sm leading-relaxed text-white/75 md:text-base">
-                    We build AI automations for customer follow-ups, documents, scheduling and reporting, so your team
-                    can spend more time running the business.
+                    We automate the follow-ups, paperwork and handoffs behind your business, connecting the tools your
+                    team already uses.
                   </p>
                   <div className="mt-6 flex flex-wrap gap-3">
                     <PrimaryButton href={CTA.href}>{CTA.label}</PrimaryButton>
@@ -145,8 +143,8 @@ export default function Home() {
               <span id="tools-heading" className="text-white">Built to connect with</span> <span className="text-white/60">your existing systems.</span>
             </Reveal>
             <Reveal as="p" y={12} delay={0.1} duration={0.8} className="mx-auto mt-8 max-w-2xl text-center text-base leading-relaxed text-white/70 md:text-lg">
-              No rip-and-replace. Where your software allows it, we connect it so work moves between systems without
-              re-keying or copy and paste. We confirm what’s possible for your specific tools before we build.
+              No rip-and-replace. We start by checking what your current software already does, so we never rebuild a
+              feature that works. Then we connect the gaps, where your tools allow it.
             </Reveal>
             <Reveal y={12} delay={0.2} duration={0.8} className="mt-10 flex flex-wrap justify-center gap-3 md:mt-14 md:gap-4">
               {TOOL_TYPES.map((t) => (
@@ -169,40 +167,40 @@ export default function Home() {
             <SectionLabel>Industries</SectionLabel>
             <Reveal y={30} className="max-w-3xl">
               <h2 id="industries-heading" className="text-3xl font-light leading-[1.15] tracking-tight text-white md:text-4xl lg:text-5xl">
-                Industries we <span className="font-pixel text-white/60">work across</span>
+                Industries we <span className="font-pixel text-white/60">focus on</span>
               </h2>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-white/70">
-                Choose an industry to see example workflows we can build. Each one is adapted to how the business operates
-                and the software it runs on.
+                Teams with steady admin running through inboxes, spreadsheets and documents. Choose one to see example
+                workflows.
               </p>
             </Reveal>
           </div>
           <Industries />
         </section>
 
-        {/* Illustrative clinic workflow */}
-        <section aria-labelledby="clinic-heading" className="relative w-full pb-4 pt-24 md:pb-6 md:pt-32">
+        {/* Illustrative back-office workflow */}
+        <section aria-labelledby="demo-heading" className="relative w-full pb-4 pt-24 md:pb-6 md:pt-32">
           <div className="relative z-10 mx-auto max-w-7xl px-6 md:px-10">
-            <SectionLabel>Example: clinic intake</SectionLabel>
+            <SectionLabel>Example workflow</SectionLabel>
             <Reveal y={30} className="mb-10 md:mb-14">
               <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-                <h2 id="clinic-heading" className="text-3xl font-light leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
-                  What it looks like <span className="text-white/60">in a clinic.</span>
+                <h2 id="demo-heading" className="text-3xl font-light leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
+                  One workflow, <span className="text-white/60">step by step.</span>
                 </h2>
                 <p className="max-w-sm text-sm leading-relaxed text-white/70 md:pb-1 md:text-base">
-                  An illustrative intake workflow for an independent practice, showing where automation runs and where
-                  staff stay in control.
+                  Month-end document collection for a bookkeeping practice. Step through to see what runs on its own and
+                  what reaches staff.
                 </p>
               </div>
             </Reveal>
             <Reveal y={20}>
-              <FlowExample flow={CLINIC.example} color={CLINIC.color} />
+              <DocCollectionDemo />
             </Reveal>
             <Link
-              href={`/industries/${CLINIC.slug}/`}
+              href="/industries/accounting/"
               className="hit-area group mt-6 inline-flex items-center gap-2 rounded-sm text-xs font-medium uppercase tracking-widest text-white/70 transition-colors hover:text-white"
             >
-              Explore healthcare workflows
+              Explore accounting workflows
               <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
           </div>
@@ -220,12 +218,12 @@ export default function Home() {
                   <span className="text-white/60">We build it. We keep it running.</span>
                 </h2>
                 <p className="max-w-sm text-sm leading-relaxed text-white/70 md:pb-1 md:text-base">
-                  One team handles the whole job: learning how your business runs, building the automation, putting it into
-                  daily use and maintaining it after launch.
+                  We start with one bottleneck, agree a scoped pilot, build it with approval points for your staff and keep
+                  it running after launch.
                 </p>
               </div>
             </Reveal>
-            <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+            <ol className="grid grid-cols-1 lg:grid-cols-5">
               {STEPS.map((s, i) => (
                 <Reveal
                   as="li"
@@ -233,13 +231,11 @@ export default function Home() {
                   y={30}
                   delay={0.1 * i}
                   duration={0.8}
-                  className={`relative border-white/[0.06] py-8 lg:px-8 lg:py-0 lg:first:pl-0 lg:last:pr-0 ${
-                    i < STEPS.length - 1 ? "border-b lg:border-b-0 lg:border-r" : ""
-                  } ${i % 2 === 0 ? "md:pr-8" : "md:pl-8"} ${i < 2 ? "md:border-b" : "md:border-b-0"} ${i % 2 === 0 ? "md:border-r" : "md:border-r-0"} lg:pl-8 lg:pr-8`}
+                  className="relative border-b border-white/[0.06] py-8 last:border-b-0 lg:border-b-0 lg:border-r lg:px-6 lg:py-0 lg:first:pl-0 lg:last:border-r-0 lg:last:pr-0"
                 >
                   <span className="mb-4 block text-[11px] uppercase tracking-[0.2em] text-white/45 md:text-xs">Step {pad(i + 1)}</span>
-                  <div className="mb-3 font-pixel text-5xl leading-none tracking-tighter text-white md:text-6xl lg:text-[64px]">{s.label}</div>
-                  <p className="max-w-[260px] text-sm leading-relaxed text-white/70 md:text-base">{s.body}</p>
+                  <div className="mb-3 font-pixel text-5xl leading-none tracking-tighter text-white md:text-6xl lg:text-[44px] xl:text-5xl">{s.label}</div>
+                  <p className="max-w-[260px] text-sm leading-relaxed text-white/70">{s.body}</p>
                 </Reveal>
               ))}
             </ol>

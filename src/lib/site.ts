@@ -26,19 +26,19 @@ export const CONTACT = {
 export const CAPABILITIES = [
   {
     title: "Workflow automation",
-    body: "Repetitive, rules-based work runs on its own — intake, routing, reminders, updates — with people stepping in where judgment matters.",
+    body: "Straightforward rules handle routine routing, reminders and updates, with people stepping in where judgment matters.",
   },
   {
     title: "AI agents and assistants",
-    body: "Assistants that answer questions, draft responses and take routine actions inside your tools, within limits you set.",
+    body: "AI that classifies incoming messages and drafts responses for your team to review, within limits you set.",
   },
   {
     title: "Document processing",
-    body: "Forms, invoices, PDFs and emails read, checked and turned into structured data your systems can use.",
+    body: "AI reads invoices, statements, forms and emails and turns them into structured data your systems can use.",
   },
   {
     title: "System integrations",
-    body: "Your systems connected, so information moves between them without copy and paste.",
+    body: "Inboxes, spreadsheets, CRM and operational tools connected, filling the gaps between them.",
   },
   {
     title: "Custom operational software",
@@ -47,10 +47,11 @@ export const CAPABILITIES = [
 ] as const;
 
 export const STEPS = [
-  { label: "Understand", body: "We map your workflows with the people doing the work." },
-  { label: "Build", body: "We build the automations and connect them to your systems." },
-  { label: "Deploy", body: "We put the solution into daily use and help your team adopt it." },
-  { label: "Improve", body: "We monitor, maintain and refine it as your business evolves." },
+  { label: "Identify", body: "We find one bottleneck worth fixing first." },
+  { label: "Map", body: "We map the current process with the people who do the work, including what your software already handles." },
+  { label: "Scope", body: "We agree a scoped pilot: what it covers and where staff approve." },
+  { label: "Build", body: "We implement it in your tools, with approval points where judgment matters." },
+  { label: "Support", body: "We monitor, maintain and adjust it as your business changes." },
 ] as const;
 
 export const TOOL_TYPES = [
@@ -58,9 +59,9 @@ export const TOOL_TYPES = [
   "Email & Calendar",
   "Spreadsheets",
   "Accounting",
-  "EMR / Practice Management",
+  "Property Management",
   "Field Service",
-  "E-commerce",
-  "ERP & Inventory",
+  "Project Management",
   "Document Storage",
+  "E-signature",
 ] as const;
