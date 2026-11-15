@@ -3,11 +3,12 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
-import { STEPS } from "@/lib/site";
+import { STEPS, asset } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Let’s Talk",
   description: "Tell us what slows your business down. We’ll find where automation can make a difference.",
+  alternates: { canonical: "contact/" },
 };
 
 export default function ContactPage() {
@@ -18,7 +19,7 @@ export default function ContactPage() {
         <div
           aria-hidden="true"
           className="smoke-mask pointer-events-none absolute inset-0"
-          style={{ backgroundImage: "url(/textures/smoke.webp)", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.1, mixBlendMode: "screen" }}
+          style={{ backgroundImage: `url(${asset("/textures/smoke.webp")})`, backgroundSize: "cover", backgroundPosition: "center", opacity: 0.1, mixBlendMode: "screen" }}
         />
         <div className="relative mx-auto grid max-w-7xl gap-16 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
           <div>

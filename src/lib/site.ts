@@ -1,3 +1,9 @@
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+/** Prefix a public/ asset path with the deployment base path. */
+export const asset = (path: string) => `${BASE_PATH}${path}`;
+
 export const NAV_LINKS = [
   { label: "Solutions", href: "/#solutions" },
   { label: "Industries", href: "/#industries" },

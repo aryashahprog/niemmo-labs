@@ -20,7 +20,11 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const ind = getIndustry((await params).slug);
   if (!ind) return {};
-  return { title: `${ind.name} automation`, description: `${ind.summary} For ${ind.audience.toLowerCase()}.` };
+  return {
+    title: `${ind.name} automation`,
+    description: `${ind.summary} For ${ind.audience.toLowerCase()}.`,
+    alternates: { canonical: `industries/${ind.slug}/` },
+  };
 }
 
 export default async function IndustryPage({ params }: { params: Promise<{ slug: string }> }) {

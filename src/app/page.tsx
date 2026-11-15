@@ -7,7 +7,7 @@ import Industries from "@/components/Industries";
 import ClosingCta from "@/components/ClosingCta";
 import Footer from "@/components/Footer";
 import { PrimaryButton, SecondaryButton } from "@/components/Buttons";
-import { CAPABILITIES, CTA, STEPS, TOOL_TYPES } from "@/lib/site";
+import { CAPABILITIES, CTA, STEPS, TOOL_TYPES, asset } from "@/lib/site";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
@@ -60,7 +60,7 @@ export default function Home() {
           <div
             aria-hidden="true"
             className="smoke-mask pointer-events-none absolute inset-0"
-            style={{ backgroundImage: "url(/textures/smoke.webp)", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.15, mixBlendMode: "screen" }}
+            style={{ backgroundImage: `url(${asset("/textures/smoke.webp")})`, backgroundSize: "cover", backgroundPosition: "center", opacity: 0.15, mixBlendMode: "screen" }}
           />
           <div className="relative mx-auto max-w-7xl px-6 md:px-10">
             <SectionLabel>Our Mission</SectionLabel>

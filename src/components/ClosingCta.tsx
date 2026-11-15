@@ -1,6 +1,6 @@
 import Reveal from "./Reveal";
 import { PrimaryButton } from "./Buttons";
-import { CTA } from "@/lib/site";
+import { CTA, asset } from "@/lib/site";
 
 export default function ClosingCta() {
   return (
@@ -8,7 +8,7 @@ export default function ClosingCta() {
       <div
         aria-hidden="true"
         className="smoke-mask pointer-events-none absolute inset-0"
-        style={{ backgroundImage: "url(/textures/smoke.webp)", backgroundSize: "cover", backgroundPosition: "center", opacity: 0.12, mixBlendMode: "screen" }}
+        style={{ backgroundImage: `url(${asset("/textures/smoke.webp")})`, backgroundSize: "cover", backgroundPosition: "center", opacity: 0.12, mixBlendMode: "screen" }}
       />
       <div className="relative mx-auto max-w-7xl text-center">
         <Reveal y={20}>

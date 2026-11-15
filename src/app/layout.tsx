@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { GeistSans } from "geist/font/sans";
 import { GeistPixelLine } from "geist/font/pixel/line";
 import "./globals.css";
+import { SITE_URL, asset } from "@/lib/site";
 
 const inter = localFont({
   src: "../fonts/inter-latin-400-normal.woff2",
@@ -12,7 +13,8 @@ const inter = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://niemmolabs.com"),
+  metadataBase: new URL(SITE_URL.endsWith("/") ? SITE_URL : `${SITE_URL}/`),
+  alternates: { canonical: "./" },
   title: {
     default: "Niemmo Labs — AI automation for small and midsize businesses",
     template: "%s — Niemmo Labs",
@@ -24,8 +26,9 @@ export const metadata: Metadata = {
     description:
       "We build and deploy AI automations around the way your business works.",
     type: "website",
+    url: "./",
   },
-  icons: { icon: "/icon.svg" },
+  icons: { icon: asset("/icon.svg") },
 };
 
 export const viewport: Viewport = {

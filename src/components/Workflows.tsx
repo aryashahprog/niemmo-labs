@@ -65,9 +65,8 @@ function FlipTile({ items, offset }: { items: Item[]; offset: number }) {
             className="absolute inset-0 flex items-center justify-center gap-2 px-3 text-center"
             style={{
               transform: `rotateX(${rot}deg)`,
-              opacity: rel === 0 ? 1 : 0,
               visibility: rel === 0 ? "visible" : "hidden",
-              transition: "transform 600ms ease-in-out, opacity 600ms ease-in-out, visibility 600ms",
+              transition: "transform 600ms ease-in-out, visibility 600ms",
               backfaceVisibility: "hidden",
             }}
           >
